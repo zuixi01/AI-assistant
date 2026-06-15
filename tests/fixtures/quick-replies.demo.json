@@ -1,0 +1,83 @@
+[
+  {
+    "id": "qr-ecommerce-101",
+    "tenantId": "t-ecommerce-101",
+    "title": "接待开场",
+    "content": "你好，欢迎来到岭南鲜配。告诉我你想买什么、送到哪里，我可以先帮你判断规格和时效。",
+    "category": "开场白",
+    "sortOrder": 1,
+    "usageCount": 1784
+  },
+  {
+    "id": "qr-ecommerce-102",
+    "tenantId": "t-ecommerce-101",
+    "title": "物流时效",
+    "content": "你的订单已出库，单号为 {tracking_no}。华东、华南大部分城市预计次日达，其他地区一般 2-4 天送达，具体以物流轨迹为准。",
+    "category": "物流",
+    "sortOrder": 2,
+    "usageCount": 963
+  },
+  {
+    "id": "qr-ecommerce-103",
+    "tenantId": "t-ecommerce-101",
+    "title": "坏果售后",
+    "content": "麻烦保留外箱和商品照片，并在签收后 24 小时内把问题部位、面单和订单号发给我们。核实后可安排补发、补偿或原路退款。",
+    "category": "售后",
+    "sortOrder": 3,
+    "usageCount": 388
+  },
+  {
+    "id": "qr-ecommerce-104",
+    "tenantId": "t-ecommerce-101",
+    "title": "包邮门槛",
+    "content": "店铺常规订单满 79 元包邮，西北及部分偏远地区满 129 元包邮；未达到门槛的订单会按地址自动计算运费。",
+    "category": "物流",
+    "sortOrder": 4,
+    "usageCount": 417
+  },
+  {
+    "id": "qr-ecommerce-105",
+    "tenantId": "t-ecommerce-101",
+    "title": "店铺活动",
+    "content": "本周活动以店铺实付页为准，常见活动是满 168 减 12、满 249 减 20；部分新品和秒杀商品不参与叠加。",
+    "category": "促销",
+    "sortOrder": 5,
+    "usageCount": 296
+  },
+  {
+    "id": "qr-ecommerce-106",
+    "tenantId": "t-ecommerce-101",
+    "title": "人工接入",
+    "content": "好的，已为你转接人工客服。人工在线时间为每天 08:30-23:00，如当前排队较多请稍等片刻。",
+    "category": "通用",
+    "sortOrder": 6,
+    "usageCount": 244
+  },
+  {
+    "id": "qr-school-101",
+    "tenantId": "t-school-101",
+    "title": "课程总览",
+    "content": "目前常报课程有 Python 自动化入门、数据分析实战、新媒体运营实训和 Scratch 启蒙班，班型分晚班、周末班和线上直播班。",
+    "category": "课程",
+    "sortOrder": 1,
+    "usageCount": 712
+  },
+  {
+    "id": "qr-school-102",
+    "tenantId": "t-school-101",
+    "title": "试听说明",
+    "content": "正式开班前可预约 1 次试听，试听需提前至少一天登记姓名、联系方式和意向课程，我们会发送上课提醒。",
+    "category": "报名",
+    "sortOrder": 2,
+    "usageCount": 468
+  },
+  {
+    "id": "qr-school-103",
+    "tenantId": "t-school-101",
+    "title": "退费规则",
+    "content": "开课前可全额退款；开课后 7 天内且未超过总课时 20% 的，可按协议申请退还剩余费用；教材和已开通的考试服务不支持退费。",
+    "category": "售后",
+    "sortOrder": 3,
+    "usageCount": 173
+  }
+]

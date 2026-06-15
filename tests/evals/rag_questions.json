@@ -1,0 +1,146 @@
+{
+  "questions": [
+    {
+      "id": "rag_001",
+      "question": "耙耙柑有什么规格？",
+      "expectedKeywords": ["5斤", "9斤", "家庭装"],
+      "category": "product_knowledge",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_002",
+      "question": "蓝莓到货后怎么保存？",
+      "expectedKeywords": ["0-4", "冷藏", "不要清洗", "3天"],
+      "category": "product_knowledge",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_003",
+      "question": "你们发什么快递？",
+      "expectedKeywords": ["冷链", "生鲜专线", "次日达", "2-4天"],
+      "category": "logistics",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_004",
+      "question": "坏果或渗汁怎么处理？",
+      "expectedKeywords": ["24小时", "外箱", "面单", "退款"],
+      "category": "aftersale",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_005",
+      "question": "退款多久到账？",
+      "expectedKeywords": ["1-3个工作日", "原路退款"],
+      "category": "aftersale",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_006",
+      "question": "能寄到香港吗？",
+      "expectedKeywords": [],
+      "category": "unknown",
+      "shouldContainAnswer": false,
+      "expectedBehavior": "refuse"
+    },
+    {
+      "id": "rag_007",
+      "question": "麒麟瓜甜度具体多少？",
+      "expectedKeywords": [],
+      "category": "unknown",
+      "shouldContainAnswer": false,
+      "expectedBehavior": "refuse_or_general"
+    },
+    {
+      "id": "rag_008",
+      "question": "推荐一款适合聚餐的水果",
+      "expectedKeywords": ["麒麟瓜", "6-7斤", "聚餐"],
+      "category": "product_recommendation",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_009",
+      "question": "妃子笑荔枝多少钱？",
+      "expectedKeywords": ["79.8", "148", "4.5斤", "9斤"],
+      "category": "price",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_010",
+      "question": "耙耙柑收到后怎么保存？",
+      "expectedKeywords": ["阴凉", "通风", "冷藏", "5-7天"],
+      "category": "product_knowledge",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_011",
+      "question": "满多少包邮？",
+      "expectedKeywords": ["79", "129", "包邮"],
+      "category": "logistics",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_012",
+      "question": "店铺最近有什么活动？",
+      "expectedKeywords": ["168", "12", "249", "20"],
+      "category": "promotion",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_013",
+      "question": "干尧榴莲是什么口感？",
+      "expectedKeywords": ["软糯", "香气", "老客"],
+      "category": "product_knowledge",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_014",
+      "question": "Python 自动化入门适合什么人？",
+      "expectedKeywords": ["零基础", "办公", "自动化"],
+      "category": "course",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_015",
+      "question": "Scratch 启蒙班适合多大孩子？",
+      "expectedKeywords": ["8-10", "Scratch", "小班"],
+      "category": "course",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_016",
+      "question": "可以试听吗？",
+      "expectedKeywords": ["1次", "提前一天", "试听"],
+      "category": "course",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_017",
+      "question": "退费规则是什么？",
+      "expectedKeywords": ["开课前", "全额", "7天", "20%"],
+      "category": "course_aftersale",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_018",
+      "question": "结课后会提供什么支持？",
+      "expectedKeywords": ["项目复盘", "简历修改", "岗位投递"],
+      "category": "course_employment",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_019",
+      "question": "数据分析实战会学哪些内容？",
+      "expectedKeywords": ["Excel", "SQL", "可视化", "统计"],
+      "category": "course",
+      "shouldContainAnswer": true
+    },
+    {
+      "id": "rag_020",
+      "question": "有晚班和周末班吗？",
+      "expectedKeywords": ["晚班", "周末班", "线上直播"],
+      "category": "promotion",
+      "shouldContainAnswer": true
+    }
+  ]
+}

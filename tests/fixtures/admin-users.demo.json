@@ -1,0 +1,34 @@
+[
+  {
+    "id": "a-ecommerce-admin",
+    "tenantId": "t-ecommerce-101",
+    "email": "ops@lingnanfresh.cn",
+    "password": "FreshOps2026!",
+    "name": "周若岚",
+    "role": "admin"
+  },
+  {
+    "id": "a-ecommerce-cs",
+    "tenantId": "t-ecommerce-101",
+    "email": "service@lingnanfresh.cn",
+    "password": "FreshService2026!",
+    "name": "许子晨",
+    "role": "operator"
+  },
+  {
+    "id": "a-school-admin",
+    "tenantId": "t-school-101",
+    "email": "ops@upskilllab.cn",
+    "password": "UpskillOps2026!",
+    "name": "梁晓雯",
+    "role": "admin"
+  },
+  {
+    "id": "a-school-cs",
+    "tenantId": "t-school-101",
+    "email": "advisor@upskilllab.cn",
+    "password": "Advisor2026!",
+    "name": "韩知远",
+    "role": "operator"
+  }
+]

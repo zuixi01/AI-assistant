@@ -1,0 +1,133 @@
+[
+  {
+    "id": "conv-ecommerce-101",
+    "tenantId": "t-ecommerce-101",
+    "userId": "u-ecommerce-101",
+    "channel": "h5",
+    "intent": "product_inquiry",
+    "intentScore": 82,
+    "status": "open",
+    "summary": "用户咨询妃子笑荔枝的新鲜度和杭州到货时效",
+    "messages": [
+      { "role": "user", "content": "你们家的妃子笑是当天采摘当天发吗？我在杭州。", "createdAt": "2026-06-14T09:12:00Z" },
+      { "role": "assistant", "content": "妃子笑荔枝是广西灵山产地直发，工作日 16:00 前付款的订单会优先安排当日出库，杭州一般次日到、最晚后天到。", "createdAt": "2026-06-14T09:12:07Z" },
+      { "role": "user", "content": "如果我周五下单，周六能收到吗？", "createdAt": "2026-06-14T09:12:49Z" },
+      { "role": "assistant", "content": "正常情况下可以，周五下午截单前下单更稳妥。我们会默认发冷链，签收后建议尽快冷藏。", "createdAt": "2026-06-14T09:13:02Z" },
+      { "role": "user", "content": "那先给我留一箱 4.5 斤的，我晚点拍。", "createdAt": "2026-06-14T09:13:40Z" }
+    ]
+  },
+  {
+    "id": "conv-ecommerce-102",
+    "tenantId": "t-ecommerce-101",
+    "userId": "u-ecommerce-102",
+    "channel": "wechat",
+    "intent": "after_sale",
+    "intentScore": 91,
+    "status": "open",
+    "summary": "用户反馈蓝莓到货后有两盒挤压渗汁，申请退款",
+    "messages": [
+      { "role": "user", "content": "昨天到的蓝莓有两盒盒盖开了，底下还有点渗汁。", "createdAt": "2026-06-14T13:26:00Z" },
+      { "role": "assistant", "content": "抱歉影响你收货体验了。麻烦拍一下外箱、面单和有渗汁的蓝莓盒，我们先按坏果售后帮你登记。", "createdAt": "2026-06-14T13:26:10Z" },
+      { "role": "user", "content": "照片发你了，我不想补发，直接退两盒的钱可以吗？", "createdAt": "2026-06-14T13:29:18Z" },
+      { "role": "assistant", "content": "可以的，已按部分退款提交售后。审核通过后会在 1-3 个工作日原路退回，微信渠道通常当天就能看到处理进度。", "createdAt": "2026-06-14T13:29:35Z" }
+    ]
+  },
+  {
+    "id": "conv-ecommerce-103",
+    "tenantId": "t-ecommerce-101",
+    "userId": "u-ecommerce-103",
+    "channel": "xiaohongshu",
+    "intent": "price_inquiry",
+    "intentScore": 68,
+    "status": "closed",
+    "summary": "小红书用户咨询耙耙柑礼盒规格与东北运费",
+    "messages": [
+      { "role": "user", "content": "耙耙柑礼盒有多大箱？发长春要不要补运费？", "createdAt": "2026-06-13T18:05:00Z" },
+      { "role": "assistant", "content": "现在常卖的是 5 斤尝鲜装和 9 斤家庭装，价格分别是 69.8 元和 118 元。长春可以发，正常地区不额外补运费。", "createdAt": "2026-06-13T18:05:11Z" },
+      { "role": "user", "content": "好的，我先收藏，下周想给家里买。", "createdAt": "2026-06-13T18:06:02Z" },
+      { "role": "assistant", "content": "没问题，下单前如果想确认甜度和到货时效，随时来问我。", "createdAt": "2026-06-13T18:06:09Z" }
+    ]
+  },
+  {
+    "id": "conv-ecommerce-104",
+    "tenantId": "t-ecommerce-101",
+    "userId": "u-ecommerce-104",
+    "channel": "douyin",
+    "intent": "purchase_intent",
+    "intentScore": 94,
+    "status": "open",
+    "summary": "抖音用户准备购买麒麟瓜和蓝莓，确认是否赶得上周末聚餐",
+    "messages": [
+      { "role": "user", "content": "麒麟瓜单果多大？我周六聚餐用，今天拍来得及吗？", "createdAt": "2026-06-14T10:02:00Z" },
+      { "role": "assistant", "content": "现在有 4.5-5.5 斤和 6-7 斤两个规格，今天 16:00 前付款可以安排当日发货，江浙沪大多次日送达。", "createdAt": "2026-06-14T10:02:08Z" },
+      { "role": "user", "content": "那我拿一个大果，再加四盒蓝莓，有活动吗？", "createdAt": "2026-06-14T10:02:56Z" },
+      { "role": "assistant", "content": "大果麒麟瓜 56.8 元，蓝莓 4 盒装 118 元，合计 174.8 元。今天店铺活动是满 168 减 12，实付 162.8 元。", "createdAt": "2026-06-14T10:03:12Z" },
+      { "role": "user", "content": "可以，帮我发下单链接。", "createdAt": "2026-06-14T10:03:54Z" },
+      { "role": "assistant", "content": "好的，我这边给你生成组合链接；收货后西瓜建议当天切开口感会更好。", "createdAt": "2026-06-14T10:04:06Z" }
+    ]
+  },
+  {
+    "id": "conv-ecommerce-105",
+    "tenantId": "t-ecommerce-101",
+    "userId": "u-ecommerce-101",
+    "channel": "h5",
+    "intent": "transfer_human",
+    "intentScore": 63,
+    "status": "transferred",
+    "summary": "用户因地址修改问题要求转人工处理",
+    "messages": [
+      { "role": "user", "content": "我刚才那单地址填错了，系统里改不了。", "createdAt": "2026-06-14T17:40:00Z" },
+      { "role": "assistant", "content": "如果订单还没出库，我可以先帮你记录修改需求。麻烦发一下订单号和正确地址。", "createdAt": "2026-06-14T17:40:11Z" },
+      { "role": "user", "content": "我已经发了，还是给我转人工吧，我怕来不及。", "createdAt": "2026-06-14T17:41:02Z" },
+      { "role": "assistant", "content": "好的，已为你转接人工客服。人工坐席在线后会优先处理地址修改问题，请保持会话畅通。", "createdAt": "2026-06-14T17:41:10Z" }
+    ]
+  },
+  {
+    "id": "conv-school-101",
+    "tenantId": "t-school-101",
+    "userId": "u-school-101",
+    "channel": "h5",
+    "intent": "course_inquiry",
+    "intentScore": 79,
+    "status": "open",
+    "summary": "用户咨询 Python 自动化课程是否适合零基础上班族",
+    "messages": [
+      { "role": "user", "content": "我做行政，想学点 Python 自动化，完全零基础跟得上吗？", "createdAt": "2026-06-14T11:15:00Z" },
+      { "role": "assistant", "content": "可以跟上。Python 自动化入门班从环境搭建、基础语法讲起，后面会带 Excel 处理、表单批量整理和简单爬取，比较适合办公提效场景。", "createdAt": "2026-06-14T11:15:13Z" },
+      { "role": "user", "content": "只有晚上有空，直播课能回放吗？", "createdAt": "2026-06-14T11:16:01Z" },
+      { "role": "assistant", "content": "直播课支持回放，回放权限默认保留 180 天。你如果想先感受一下课堂节奏，可以先约一节试听。", "createdAt": "2026-06-14T11:16:17Z" }
+    ]
+  },
+  {
+    "id": "conv-school-102",
+    "tenantId": "t-school-101",
+    "userId": "u-school-102",
+    "channel": "wechat",
+    "intent": "course_inquiry",
+    "intentScore": 77,
+    "status": "open",
+    "summary": "家长咨询 9 岁孩子的 Scratch 班型与试听安排",
+    "messages": [
+      { "role": "user", "content": "孩子 9 岁，之前没接触过编程，Scratch 班会不会太难？", "createdAt": "2026-06-14T15:02:00Z" },
+      { "role": "assistant", "content": "9 岁报 Scratch 启蒙班比较合适，我们会从图形化逻辑、角色动画和小游戏制作开始，不要求有编程基础。", "createdAt": "2026-06-14T15:02:14Z" },
+      { "role": "user", "content": "一个班多少人？孩子比较慢热。", "createdAt": "2026-06-14T15:03:03Z" },
+      { "role": "assistant", "content": "启蒙班常规是 6-8 人小班，课堂会有助教协助。你们可以先约周六下午的试听课，看孩子是否适应。", "createdAt": "2026-06-14T15:03:19Z" }
+    ]
+  },
+  {
+    "id": "conv-school-103",
+    "tenantId": "t-school-101",
+    "userId": "u-school-103",
+    "channel": "douyin",
+    "intent": "course_inquiry",
+    "intentScore": 72,
+    "status": "closed",
+    "summary": "用户咨询数据分析课程的基础要求和就业辅导后暂未报名",
+    "messages": [
+      { "role": "user", "content": "数据分析课程需要数学很好吗？我之前做电商运营。", "createdAt": "2026-06-13T20:22:00Z" },
+      { "role": "assistant", "content": "不需要很强的高数基础，课程前半段会先补 Excel、SQL 和基础统计思路，更看重你能否持续做项目练习。", "createdAt": "2026-06-13T20:22:12Z" },
+      { "role": "user", "content": "结课后会推荐工作吗？", "createdAt": "2026-06-13T20:23:01Z" },
+      { "role": "assistant", "content": "我们会提供简历修改、项目复盘和岗位投递辅导，但不会承诺包就业。如果你方便，也可以先听一节公开课再决定。", "createdAt": "2026-06-13T20:23:19Z" }
+    ]
+  }
+]

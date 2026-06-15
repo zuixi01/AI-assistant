@@ -1,0 +1,594 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgvector(map: "vector", schema: "public")]
+}
+
+model Tenant {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  slug        String   @unique
+  type        String   @db.VarChar(32)
+  status      String   @default("active") @db.VarChar(32)
+  plan        String   @default("free") @db.VarChar(32)
+  config      Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  admins              Admin[]
+  users               User[]
+  conversations       Conversation[]
+  knowledgeSources    KnowledgeSource[]
+  knowledgeBases      KnowledgeBase[]
+  retrievalLogs       KnowledgeRetrievalLog[]
+  leads               Lead[]
+  unknownQuestions    UnknownQuestion[]
+  xhsAccounts         XhsAccount[]
+  xhsMessages         XhsMessage[]
+  chatgptOnCsAccounts ChatGptOnCsAccount[]
+  platformReplyFeedbacks PlatformReplyFeedback[]
+  juguangAccounts    JuguangAccount[]
+  quickReplies       QuickReply[]
+  leadTags           LeadTag[]
+  products           Product[]
+  orders             Order[]
+  doudianShops       DoudianShop[]
+
+  @@map("tenants")
+}
+
+model Admin {
+  id        String   @id @default(uuid()) @db.Uuid
+  tenantId  String   @db.Uuid @map("tenant_id")
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("admin") @db.VarChar(32)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("admins")
+}
+
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  tenantId      String    @db.Uuid @map("tenant_id")
+  nickname      String?
+  phone         String?   @db.VarChar(32)
+  avatarUrl     String?   @map("avatar_url")
+  source        String?   @db.VarChar(64)
+  wechatOpenid  String?   @unique @map("wechat_openid")
+  douyinOpenid  String?   @unique @map("douyin_openid")
+  douyinUnionid String?   @map("douyin_unionid")
+  xhsOpenid     String?   @unique @map("xhs_openid")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  tenant        Tenant         @relation(fields: [tenantId], references: [id])
+  conversations Conversation[]
+  leads         Lead[]
+
+  @@map("users")
+}
+
+model Conversation {
+  id          String   @id @default(uuid()) @db.Uuid
+  tenantId    String   @db.Uuid @map("tenant_id")
+  userId      String?  @db.Uuid @map("user_id")
+  publicTokenHash String @unique @map("public_token_hash") @db.VarChar(64)
+  channel     String   @db.VarChar(64)
+  platformUserId String? @map("platform_user_id") @db.VarChar(128)
+  platformAccountId String? @map("platform_account_id") @db.VarChar(128)
+  intent      String?  @db.VarChar(128)
+  intentScore Int      @default(0) @map("intent_score")
+  status      String   @default("open") @db.VarChar(32)
+  summary     String?
+  assignedTo  String?  @db.Uuid @map("assigned_to")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tenant   Tenant    @relation(fields: [tenantId], references: [id])
+  user     User?     @relation(fields: [userId], references: [id])
+  messages Message[]
+  lead     Lead?
+  xhsMessages XhsMessage[]
+  platformReplyFeedbacks PlatformReplyFeedback[]
+
+  @@index([tenantId, status, updatedAt])
+  @@index([tenantId, updatedAt])
+  @@index([tenantId, channel, platformAccountId, platformUserId, updatedAt])
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(uuid()) @db.Uuid
+  conversationId String   @db.Uuid @map("conversation_id")
+  role           String   @db.VarChar(32)
+  content        String
+  channel        String?  @db.VarChar(64)
+  metadata       Json?
+  citations      Json?
+  suggestedReply String?  @map("suggested_reply")
+  replyStatus    String   @default("pending") @map("reply_status") @db.VarChar(32)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  platformReplyFeedbacks PlatformReplyFeedback[]
+
+  @@index([conversationId, createdAt])
+  @@map("messages")
+}
+
+model KnowledgeBase {
+  id          String   @id @default(uuid()) @db.Uuid
+  tenantId    String   @db.Uuid @map("tenant_id")
+  name        String
+  description String?
+  teamId      String?  @db.Uuid @map("team_id")
+  workspaceId String?  @db.Uuid @map("workspace_id")
+  projectId   String?  @db.Uuid @map("project_id")
+  status      String   @default("active") @db.VarChar(32)
+  config      Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tenant  Tenant             @relation(fields: [tenantId], references: [id])
+  sources KnowledgeSource[]
+
+  @@index([tenantId, status])
+  @@map("knowledge_bases")
+}
+
+model KnowledgeSource {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @db.Uuid @map("tenant_id")
+  knowledgeBaseId String?  @db.Uuid @map("knowledge_base_id")
+  title           String
+  description String?
+  type        String   @db.VarChar(64)
+  category    String?  @db.VarChar(128)
+  tags        Json?
+  sourceUrl   String?  @map("source_url")
+  rawText     String?
+
+  fileName  String?  @map("file_name") @db.VarChar(255)
+  fileType  String?  @map("file_type") @db.VarChar(50)
+  fileSize  BigInt?  @map("file_size")
+  fileUrl   String?  @map("file_url")
+
+  contentSections Json?   @map("content_sections")
+
+  priority    Int      @default(0)
+  status      String   @default("active") @db.VarChar(32)
+  parseStatus String   @default("pending") @map("parse_status") @db.VarChar(32)
+  indexStatus String   @default("pending") @map("index_status") @db.VarChar(32)
+
+  validFrom  DateTime? @map("valid_from")
+  validTo    DateTime? @map("valid_to")
+  parseError String?   @map("parse_error")
+  indexError String?   @map("index_error")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  tenant        Tenant         @relation(fields: [tenantId], references: [id])
+  knowledgeBase KnowledgeBase? @relation(fields: [knowledgeBaseId], references: [id])
+  chunks        KnowledgeChunk[]
+  jobs          KnowledgeParseJob[]
+
+  @@index([tenantId, status, createdAt])
+  @@index([tenantId, knowledgeBaseId, status])
+  @@index([tenantId, type])
+  @@map("knowledge_sources")
+}
+
+model KnowledgeChunk {
+  id             String   @id @default(uuid()) @db.Uuid
+  tenantId       String   @db.Uuid @map("tenant_id")
+  sourceId       String   @db.Uuid @map("source_id")
+  parentChunkId  String?  @db.Uuid @map("parent_chunk_id")
+
+  title          String?  @db.VarChar(255)
+  titlePath      Json?    @map("title_path")
+
+  content        String
+  contentType    String   @default("text") @map("content_type") @db.VarChar(32)
+  q              String?
+  a              String?
+  summary        String?
+  keywords       Json?
+  keywordText    String?  @map("keyword_text")
+
+  pageNumber     Int?     @map("page_number")
+  sheetName      String?  @map("sheet_name") @db.VarChar(255)
+  rowNumber      Int?     @map("row_number")
+  tableNumber    Int?     @map("table_number")
+  imageNumber    Int?     @map("image_number")
+  imageUrl       String?  @map("image_url")
+  latex          String?
+  chunkIndex     Int      @default(0) @map("chunk_index")
+  tokenCount     Int?     @map("token_count")
+
+  metadata       Json?
+  embedding      Unsupported("vector(1536)")?
+  vectorIndexId  BigInt   @unique @default(autoincrement()) @map("vector_index_id")
+
+  priority       Int      @default(0)
+  status         String   @default("active") @db.VarChar(32)
+  hitCount       Int      @default(0) @map("hit_count")
+  lastHitAt      DateTime? @map("last_hit_at")
+
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  source KnowledgeSource @relation(fields: [sourceId], references: [id])
+
+  @@index([tenantId, sourceId])
+  @@index([tenantId, status])
+  @@map("knowledge_chunks")
+}
+
+model KnowledgeParseJob {
+  id           String    @id @default(uuid()) @db.Uuid
+  tenantId     String    @db.Uuid @map("tenant_id")
+  sourceId     String    @db.Uuid @map("source_id")
+  jobType      String    @default("parse") @map("job_type") @db.VarChar(32)
+  status       String    @default("pending") @db.VarChar(32)
+  progress     Int       @default(0)
+  currentStep  String?   @map("current_step") @db.VarChar(255)
+  errorMessage String?   @map("error_message")
+  startedAt    DateTime? @map("started_at")
+  finishedAt   DateTime? @map("finished_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  source KnowledgeSource @relation(fields: [sourceId], references: [id])
+
+  @@index([tenantId, sourceId])
+  @@map("knowledge_parse_jobs")
+}
+
+model KnowledgeRetrievalLog {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @db.Uuid @map("tenant_id")
+  conversationId  String?  @db.Uuid @map("conversation_id")
+  messageId       String?  @db.Uuid @map("message_id")
+  originalQuery   String   @map("original_query")
+  rewrittenQuery  String?  @map("rewritten_query")
+  scene           String?  @db.VarChar(64)
+  intent          String?  @db.VarChar(64)
+  entities        Json?
+  retrievedChunkIds Json?  @map("retrieved_chunk_ids")
+  rerankedChunkIds  Json?  @map("reranked_chunk_ids")
+  topScore        Float?   @map("top_score")
+  confidence      Float?
+  answerStatus    String?  @map("answer_status") @db.VarChar(32)
+  answer          String?
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, conversationId])
+  @@map("knowledge_retrieval_logs")
+}
+
+model Lead {
+  id             String   @id @default(uuid()) @db.Uuid
+  tenantId       String   @db.Uuid @map("tenant_id")
+  userId         String?  @db.Uuid @map("user_id")
+  conversationId String?  @unique @db.Uuid @map("conversation_id")
+  name           String?  @db.VarChar(128)
+  phone          String?  @db.VarChar(32)
+  source         String?  @db.VarChar(64)
+  intentScore    Int      @default(0) @map("intent_score")
+  tags           Json?
+  followStatus   String   @default("new") @map("follow_status") @db.VarChar(32)
+  ownerId        String?  @db.Uuid @map("owner_id")
+  remark         String?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  tenant       Tenant        @relation(fields: [tenantId], references: [id])
+  user         User?         @relation(fields: [userId], references: [id])
+  conversation Conversation? @relation(fields: [conversationId], references: [id], onDelete: SetNull)
+
+  leadTags      LeadTag[] @relation("LeadTags")
+  @@index([tenantId, followStatus, createdAt])
+  @@index([tenantId, createdAt])
+  @@map("leads")
+}
+
+model UnknownQuestion {
+  id                 String   @id @default(uuid()) @db.Uuid
+  tenantId           String   @db.Uuid @map("tenant_id")
+  question           String
+  normalizedQuestion String?  @map("normalized_question")
+  scene              String?  @db.VarChar(64)
+  intent             String?  @db.VarChar(64)
+  conversationId     String?  @db.Uuid @map("conversation_id")
+  messageId          String?  @db.Uuid @map("message_id")
+  hitChunks          Json?    @map("hit_chunks")
+  aiResponse         String?  @map("ai_response")
+  failReason         String?  @map("fail_reason")
+  count              Int      @default(1)
+  lastSeenAt         DateTime @default(now()) @map("last_seen_at")
+  status             String   @default("pending") @db.VarChar(32)
+  suggestedAnswer    String?  @map("suggested_answer")
+  assignedTo         String?  @db.Uuid @map("assigned_to")
+  suggestion         String?
+  resolved           Boolean  @default(false)
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, status])
+  @@map("unknown_questions")
+}
+
+model WebhookEvent {
+  id              String    @id @default(uuid()) @db.Uuid
+  tenantId        String?   @db.Uuid @map("tenant_id")
+  platform        String    @db.VarChar(32)
+  eventType       String    @map("event_type") @db.VarChar(128)
+  externalEventId String?   @map("external_event_id") @db.VarChar(255)
+  payload         Json
+  processed       Boolean   @default(false)
+  retryCount      Int       @default(0) @map("retry_count")
+  errorMessage    String?
+  createdAt       DateTime  @default(now()) @map("created_at")
+  processedAt     DateTime? @map("processed_at")
+
+  @@index([platform, externalEventId])
+  @@map("webhook_events")
+}
+
+model PlatformApiLog {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String?  @db.Uuid @map("tenant_id")
+  platform        String   @db.VarChar(32)
+  apiName         String   @map("api_name") @db.VarChar(128)
+  requestPayload  Json?    @map("request_payload")
+  responsePayload Json?    @map("response_payload")
+  statusCode      Int?     @map("status_code")
+  errorMessage    String?
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@map("platform_api_logs")
+}
+
+model XhsAccount {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @db.Uuid @map("tenant_id")
+  userId          String   @map("user_id") @db.VarChar(128)
+  appId           String   @map("app_id") @db.VarChar(128)
+  accountCode     String   @map("account_code")
+  nickName        String?  @map("nick_name")
+  accountType     String   @default("enterprise") @map("account_type") @db.VarChar(32)
+  kosUserId       String?  @map("kos_user_id") @db.VarChar(128)
+  accessToken     String?  @map("access_token")
+  status          String   @default("active") @db.VarChar(32)
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  tenant   Tenant       @relation(fields: [tenantId], references: [id])
+  messages XhsMessage[]
+
+  @@unique([tenantId, userId])
+  @@index([tenantId])
+  @@map("xhs_accounts")
+}
+
+model XhsMessage {
+  id              String    @id @default(uuid()) @db.Uuid
+  tenantId        String    @db.Uuid @map("tenant_id")
+  accountId       String    @db.Uuid @map("account_id")
+  conversationId  String?   @db.Uuid @map("conversation_id")
+  messageId       String    @unique @map("message_id") @db.VarChar(128)
+  messageType     String    @map("message_type") @db.VarChar(32)
+  messageSource   Int       @map("message_source")
+  fromUserId      String    @map("from_user_id") @db.VarChar(128)
+  toUserId        String    @map("to_user_id") @db.VarChar(128)
+  content         String?
+  rawContent      String?   @map("raw_content")
+  timestamp       DateTime
+  userInfo        Json?     @map("user_info")
+  processed       Boolean   @default(false)
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  tenant       Tenant        @relation(fields: [tenantId], references: [id])
+  account      XhsAccount    @relation(fields: [accountId], references: [id])
+  conversation Conversation? @relation(fields: [conversationId], references: [id])
+
+  @@index([tenantId, messageId])
+  @@index([conversationId])
+  @@map("xhs_messages")
+}
+
+model ChatGptOnCsAccount {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @db.Uuid @map("tenant_id")
+  platform        String   @db.VarChar(32)  // wechat, taobao, pdd, bilibili, weibo, zhihu, douyin_enterprise
+  platformUserId  String   @map("platform_user_id") @db.VarChar(128)
+  platformNickname String? @map("platform_nickname") @db.VarChar(128)
+  accessToken     String?  @map("access_token")
+  config          Json?    // platform-specific config (reply delay, auto-reply toggle, etc.)
+  status          String   @default("active") @db.VarChar(32)
+  autoReply       Boolean  @default(true) @map("auto_reply")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@unique([tenantId, platform, platformUserId])
+  @@index([tenantId, platform, status])
+  @@map("chatgpt_on_cs_accounts")
+}
+
+model PlatformReplyFeedback {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @db.Uuid @map("tenant_id")
+  conversationId  String   @db.Uuid @map("conversation_id")
+  messageId       String   @db.Uuid @map("message_id")
+  channel         String   @db.VarChar(32)
+  originalReply   String   @map("original_reply")
+  correctedReply  String?  @map("corrected_reply")
+  feedbackType    String   @default("human_correction") @map("feedback_type") @db.VarChar(32) // human_correction, user_feedback, auto_detected
+  score           Int?     // 1-5 rating if available
+  reason          String?
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  tenant       Tenant       @relation(fields: [tenantId], references: [id])
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  message      Message      @relation(fields: [messageId], references: [id])
+
+  @@index([tenantId, channel, createdAt])
+  @@index([conversationId])
+  @@map("platform_reply_feedbacks")
+}
+
+model JuguangAccount {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @db.Uuid @map("tenant_id")
+  appId           String   @map("app_id") @db.VarChar(128)
+  appSecret       String?  @map("app_secret")
+  accessToken     String?  @map("access_token")
+  refreshToken    String?  @map("refresh_token")
+  tokenExpiresAt  DateTime? @map("token_expires_at")
+  accountName     String?  @map("account_name") @db.VarChar(128)
+  status          String   @default("active") @db.VarChar(32)
+  autoReply       Boolean  @default(true) @map("auto_reply")
+  config          Json?    // platform-specific config
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@unique([tenantId, appId])
+  @@index([tenantId, status])
+  @@map("juguang_accounts")
+}
+
+model QuickReply {
+  id          String   @id @default(uuid()) @db.Uuid
+  tenantId    String   @db.Uuid @map("tenant_id")
+  title       String   @db.VarChar(128)
+  content     String
+  category    String?  @db.VarChar(64)
+  sortOrder   Int      @default(0) @map("sort_order")
+  usageCount  Int      @default(0) @map("usage_count")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, category])
+  @@map("quick_replies")
+}
+
+model LeadTag {
+  id        String   @id @default(uuid()) @db.Uuid
+  tenantId  String   @db.Uuid @map("tenant_id")
+  name      String   @db.VarChar(64)
+  color     String?  @db.VarChar(16) // hex color
+  createdAt DateTime @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  leads  Lead[] @relation("LeadTags")
+
+  @@unique([tenantId, name])
+  @@map("lead_tags")
+}
+
+model Product {
+  id                 String   @id @default(uuid()) @db.Uuid
+  tenantId           String   @db.Uuid @map("tenant_id")
+  platform           String?  @db.VarChar(32)
+  externalProductId  String?  @map("external_product_id")
+  shopId             String?  @map("shop_id")
+  title              String
+  category           String?  @db.VarChar(128)
+  price              Int?
+  stock              Int?
+  status             String?  @db.VarChar(32)
+  imageUrl           String?  @map("image_url")
+  detailUrl          String?  @map("detail_url")
+  aiSummary          String?  @map("ai_summary")
+  aiSellingPoints    Json?    @map("ai_selling_points")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant        @relation(fields: [tenantId], references: [id])
+  skus   ProductSku[]
+
+  @@unique([tenantId, platform, externalProductId])
+  @@index([tenantId, category, status])
+  @@index([tenantId, status, createdAt])
+  @@map("products")
+}
+
+model ProductSku {
+  id             String   @id @default(uuid()) @db.Uuid
+  productId      String   @db.Uuid @map("product_id")
+  externalSkuId  String?  @map("external_sku_id")
+  skuName        String?  @map("sku_name")
+  price          Int?
+  stock          Int?
+  attributes     Json?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([productId, externalSkuId])
+  @@map("product_skus")
+}
+
+model Order {
+  id               String   @id @default(uuid()) @db.Uuid
+  tenantId         String   @db.Uuid @map("tenant_id")
+  platform         String?  @db.VarChar(32)
+  externalOrderId  String?  @map("external_order_id")
+  userId           String?  @db.Uuid @map("user_id")
+  amount           Int?
+  status           String?  @db.VarChar(64)
+  logisticsStatus  String?  @map("logistics_status") @db.VarChar(64)
+  aftersaleStatus  String?  @map("aftersale_status") @db.VarChar(64)
+  rawPayload       Json?    @map("raw_payload")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@unique([tenantId, platform, externalOrderId])
+  @@index([tenantId, createdAt])
+  @@index([tenantId, status, createdAt])
+  @@map("orders")
+}
+
+model DoudianShop {
+  id                    String   @id @default(uuid()) @db.Uuid
+  tenantId              String   @db.Uuid @map("tenant_id")
+  shopId                String   @db.VarChar(128) @map("shop_id")
+  shopName              String?  @map("shop_name")
+  appKey                String?  @map("app_key")
+  accessToken           String   @map("access_token")
+  refreshToken          String   @map("refresh_token")
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at")
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at")
+  scopes                Json?
+  status                String   @default("active") @db.VarChar(32)
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("doudian_shops")
+}

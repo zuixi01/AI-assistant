@@ -1,0 +1,51 @@
+services:
+  postgres-test:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ai
+      POSTGRES_PASSWORD: ai_password
+      POSTGRES_DB: ai_sales_test
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis-test:
+    image: redis:7-alpine
+    ports:
+      - "6381:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  python-sidecar-test:
+    build:
+      context: ./services/python-sidecar
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8001
+      DATABASE_URL: postgresql://ai:ai_password@postgres-test:5432/ai_sales_test
+      SIDECAR_SHARED_TOKEN: ${SIDECAR_SHARED_TOKEN:-test-sidecar-token}
+      SIDECAR_ALLOWED_ORIGINS: ${SIDECAR_ALLOWED_ORIGINS:-http://localhost:3100,http://127.0.0.1:3100}
+      ENABLE_KNOWLEDGE_GRAPH: "false"
+      PARSER_BACKEND: fallback
+    ports:
+      - "127.0.0.1:8002:8001"
+    depends_on:
+      postgres-test:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8001/health', timeout=2).read()\""]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+volumes:
+  postgres_test_data:

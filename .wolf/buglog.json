@@ -1,0 +1,603 @@
+{
+  "version": 1,
+  "bugs": [
+    {
+      "id": "bug-001",
+      "timestamp": "2026-06-14T04:30:34.055Z",
+      "error_message": "Missing error handling in unknown",
+      "file": "apps/web/src/app/admin/conversations/page.tsx",
+      "root_cause": "Code path had no error handling — exceptions would propagate uncaught",
+      "fix": "Added try/catch block | Also: const handleExport = async (format: string) => {; try { | Also: await apiPost(`/api/admin/workspace/conversations/${conversa; const handleAssign = async () => {",
+      "tags": [
+        "auto-detected",
+        "error-handling",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-06-14T04:32:57.276Z"
+    },
+    {
+      "id": "bug-002",
+      "timestamp": "2026-06-14T04:31:36.544Z",
+      "error_message": "Incorrect value in code",
+      "file": "apps/web/src/app/admin/conversations/page.tsx",
+      "root_cause": "Had \"soft-scrollbar max-h-[calc(100vh-10rem)] overflow",
+      "fix": "Changed to \"soft-scrollbar max-h-[calc(100vh-16rem)] overflow",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:31:36.544Z"
+    },
+    {
+      "id": "bug-003",
+      "timestamp": "2026-06-14T04:34:14.661Z",
+      "error_message": "Incorrect value in code",
+      "file": "apps/web/src/app/admin/layout.tsx",
+      "root_cause": "Had '/admin/workspace'",
+      "fix": "Changed to '/admin/conversations'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:34:14.661Z"
+    },
+    {
+      "id": "bug-004",
+      "timestamp": "2026-06-14T04:36:24.487Z",
+      "error_message": "Incorrect value in code",
+      "file": "apps/web/src/lib/i18n/locales/zh.ts",
+      "root_cause": "Had '客服工作台'",
+      "fix": "Changed to '快捷回复'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:36:24.487Z"
+    },
+    {
+      "id": "bug-005",
+      "timestamp": "2026-06-14T04:36:41.357Z",
+      "error_message": "Significant refactor of ",
+      "file": "apps/web/src/lib/i18n/locales/zh.ts",
+      "root_cause": "11 lines replaced/restructured",
+      "fix": "Rewrote 23→12 lines (11 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:36:41.357Z"
+    },
+    {
+      "id": "bug-006",
+      "timestamp": "2026-06-14T04:37:31.130Z",
+      "error_message": "Incorrect value in code",
+      "file": "apps/web/src/lib/i18n/locales/en.ts",
+      "root_cause": "Had 'Workspace'",
+      "fix": "Changed to 'Quick Reply'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:37:31.130Z"
+    },
+    {
+      "id": "bug-007",
+      "timestamp": "2026-06-14T04:37:44.290Z",
+      "error_message": "Significant refactor of ",
+      "file": "apps/web/src/lib/i18n/locales/en.ts",
+      "root_cause": "11 lines replaced/restructured",
+      "fix": "Rewrote 23→12 lines (11 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:37:44.290Z"
+    },
+    {
+      "id": "bug-008",
+      "timestamp": "2026-06-14T04:38:47.920Z",
+      "error_message": "Incorrect value in code",
+      "file": "apps/web/src/lib/i18n/locales/ja.ts",
+      "root_cause": "Had 'ワークスペース'",
+      "fix": "Changed to 'クイック返信'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:38:47.920Z"
+    },
+    {
+      "id": "bug-009",
+      "timestamp": "2026-06-14T04:38:59.990Z",
+      "error_message": "Incorrect value in code",
+      "file": "apps/web/src/lib/i18n/locales/fr.ts",
+      "root_cause": "Had 'Espace de travail'",
+      "fix": "Changed to 'Réponse rapide'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:38:59.990Z"
+    },
+    {
+      "id": "bug-010",
+      "timestamp": "2026-06-14T04:39:17.094Z",
+      "error_message": "Significant refactor of ",
+      "file": "apps/web/src/lib/i18n/locales/fr.ts",
+      "root_cause": "11 lines replaced/restructured",
+      "fix": "Rewrote 23→12 lines (11 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:39:17.094Z"
+    },
+    {
+      "id": "bug-011",
+      "timestamp": "2026-06-14T04:39:19.684Z",
+      "error_message": "Significant refactor of ",
+      "file": "apps/web/src/lib/i18n/locales/ja.ts",
+      "root_cause": "11 lines replaced/restructured",
+      "fix": "Rewrote 23→12 lines (11 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T04:39:19.684Z"
+    },
+    {
+      "id": "bug-012",
+      "timestamp": "2026-06-14T13:21:19.664+08:00",
+      "error_message": "Get-Content failed for apps/web/src/app/admin/conversations/[id]/page.tsx because PowerShell treated [id] as a wildcard pattern",
+      "file": "apps/web/src/app/admin/conversations/[id]/page.tsx",
+      "root_cause": "PowerShell -Path interprets brackets as wildcard character classes for dynamic Next.js route folder names",
+      "fix": "Use Get-Content -LiteralPath for paths containing bracketed route segments",
+      "tags": [
+        "powershell",
+        "dynamic-route",
+        "command-error"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T13:21:19.664+08:00"
+    },
+    {
+      "id": "bug-013",
+      "timestamp": "2026-06-14T13:24:00+08:00",
+      "error_message": "Product Design user_context_preflight.py was not found at the plugin root scripts path from the workflow note",
+      "file": "C:/Users/29408/.codex/plugins/cache/openai-curated-remote/product-design/0.1.46/skills/user-context/scripts/user_context_preflight.py",
+      "root_cause": "The user-context preflight script lives under the user-context skill directory, not the product-design plugin root scripts directory",
+      "fix": "Ran python with the actual skill-local scripts/user_context_preflight.py path",
+      "tags": [
+        "product-design",
+        "tooling",
+        "command-error"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T13:24:00+08:00"
+    },
+    {
+      "id": "bug-014",
+      "timestamp": "2026-06-14T13:41:00+08:00",
+      "error_message": "Playwright CLI failed to open because Chromium distribution 'chrome' was not found at C:/Users/29408/AppData/Local/Google/Chrome/Application/chrome.exe",
+      "file": ".wolf/designqc-captures",
+      "root_cause": "The CLI defaults to the Chrome channel, but this Windows machine has Microsoft Edge installed instead of Chrome at the expected path",
+      "fix": "Re-ran Playwright CLI with `open ... --browser msedge` and captured authenticated admin screenshots successfully",
+      "tags": [
+        "playwright",
+        "visual-qa",
+        "windows",
+        "command-error"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T13:41:00+08:00"
+    },
+    {
+      "id": "bug-015",
+      "timestamp": "2026-06-14T06:32:57.557Z",
+      "error_message": "Significant refactor of ",
+      "file": "apps/web/src/app/admin/layout.tsx",
+      "root_cause": "4 lines replaced/restructured",
+      "fix": "Rewrote 12→8 lines (4 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "tsx"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T06:32:57.557Z"
+    },
+    {
+      "id": "bug-016",
+      "timestamp": "2026-06-14T06:40:43.391Z",
+      "error_message": "Significant refactor of ",
+      "file": "C:/Users/29408/.claude/plans/jaunty-noodling-harbor.md",
+      "root_cause": "25 lines replaced/restructured",
+      "fix": "Rewrote 39→64 lines (25 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T06:40:43.391Z"
+    },
+    {
+      "id": "bug-017",
+      "timestamp": "2026-06-14T10:31:37.547Z",
+      "error_message": "Significant refactor of ",
+      "file": "C:/Users/29408/.claude/plans/agile-dazzling-panda.md",
+      "root_cause": "3 lines replaced/restructured",
+      "fix": "Rewrote 37→121 lines (3 removed) | Also: 1. 检查配置是否正确加载：; 2. 测试 webhook 端点：",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-06-14T10:31:49.517Z"
+    },
+    {
+      "id": "bug-018",
+      "timestamp": "2026-06-14T10:32:26.716Z",
+      "error_message": "Function not marked async",
+      "file": "C:/Users/29408/.claude/plans/agile-dazzling-panda.md",
+      "root_cause": "Function uses await but wasn't declared async",
+      "fix": "Added async modifier",
+      "tags": [
+        "auto-detected",
+        "async-fix",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-14T10:32:26.716Z"
+    },
+    {
+      "id": "bug-019",
+      "timestamp": "2026-06-15T00:13:00+08:00",
+      "error_message": "Failed to read planning templates from C:/Users/29408/.claude/skills/planning-with-files-zh/templates/*.md",
+      "file": "C:/Users/29408/.agents/skills/planning-with-files-zh/templates",
+      "root_cause": "The planning skill is installed under .agents/skills in this environment, not under .claude/skills",
+      "fix": "Located the actual skill directory with LS and re-read templates from C:/Users/29408/.agents/skills/planning-with-files-zh/templates/",
+      "tags": [
+        "planning-skill",
+        "windows",
+        "command-error",
+        "path"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T00:13:00+08:00"
+    },
+    {
+      "id": "bug-020",
+      "timestamp": "2026-06-15T00:51:00+08:00",
+      "error_message": "prisma generate failed with EPERM when renaming query_engine-windows.dll.node on Windows",
+      "file": "packages/database/prisma/schema.prisma",
+      "root_cause": "The Prisma Windows query engine DLL was locked under node_modules/.pnpm during client regeneration, preventing prisma generate from replacing the existing binary",
+      "fix": "Recorded the failure, attempted targeted cleanup, and continued validation with API typecheck/build plus focused unit tests; regeneration should be retried in an unlocked environment",
+      "tags": [
+        "prisma",
+        "windows",
+        "dll-lock",
+        "command-error"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T00:51:00+08:00"
+    },
+    {
+      "id": "bug-021",
+      "timestamp": "2026-06-15T01:37:00+08:00",
+      "error_message": "pnpm test:infra:up failed with 'project name must not be empty'",
+      "file": "tests/scripts/test-infra.ts",
+      "root_cause": "Docker Compose could not infer a valid default project name from the current Windows/Chinese-path workspace during scripted test infra startup",
+      "fix": "Set COMPOSE_PROJECT_NAME explicitly in test-infra.ts and removed the obsolete version field from docker-compose.test.yml",
+      "tags": [
+        "docker-compose",
+        "windows",
+        "test-infra",
+        "command-error"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T01:37:00+08:00"
+    },
+    {
+      "id": "bug-022",
+      "timestamp": "2026-06-15T01:49:00+08:00",
+      "error_message": "reset:test and seed:test could not resolve @prisma/client / bcryptjs from root test scripts",
+      "file": "tests/scripts/reset-test-db.ts",
+      "root_cause": "The monorepo root runtime did not expose database package dependencies to tsx scripts executed from the workspace root",
+      "fix": "Ran DB-touching scripts through packages/database and resolved Prisma/bcrypt dependencies from that package scope",
+      "tags": [
+        "monorepo",
+        "prisma",
+        "tsx",
+        "module-resolution"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T01:49:00+08:00"
+    },
+    {
+      "id": "bug-023",
+      "timestamp": "2026-06-15T01:55:00+08:00",
+      "error_message": "seed:test failed with P2023 invalid UUID for fixture ids like t-ecommerce-001",
+      "file": "tests/scripts/seed-test-data.ts",
+      "root_cause": "Legacy demo fixtures still use short string ids while the Prisma schema now requires UUID values for tenants, users, conversations, leads, and related foreign keys",
+      "fix": "Added stable UUID mapping for fixture ids and switched nullable relations to optional UUID conversion before seeding",
+      "tags": [
+        "seed",
+        "fixtures",
+        "prisma",
+        "uuid"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T01:55:00+08:00"
+    },
+    {
+      "id": "bug-024",
+      "timestamp": "2026-06-15T01:58:00+08:00",
+      "error_message": "module-boundaries.test.ts timed out importing heavy Nest modules",
+      "file": "tests/unit/module-boundaries.test.ts",
+      "root_cause": "The contract test used runtime module imports and reflection, which made a simple architecture assertion depend on heavyweight Nest module loading",
+      "fix": "Rewrote the test as lightweight source-level contract assertions against knowledge.module.ts and app.module.ts",
+      "tags": [
+        "vitest",
+        "timeout",
+        "architecture-test",
+        "unit-test"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T01:58:00+08:00"
+    },
+    {
+      "id": "bug-025",
+      "timestamp": "2026-06-15T01:59:00+08:00",
+      "error_message": "admin-web-auth-contract.test.ts flagged page copy containing 'Authorization' as a bearer-token violation",
+      "file": "tests/e2e/admin-web-auth-contract.test.ts",
+      "root_cause": "The regex matched any Authorization/Bearer text in source files, including harmless UI copy, instead of only dangerous auth header/token usage",
+      "fix": "Tightened the assertions to match localStorage usage, Authorization headers, and Bearer token patterns only",
+      "tags": [
+        "e2e-test",
+        "false-positive",
+        "auth-contract",
+        "regex"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T01:59:00+08:00"
+    },
+    {
+      "id": "bug-026",
+      "timestamp": "2026-06-15T10:06:00+08:00",
+      "error_message": "sidecar-auth.test.ts failed under validate:release because test infra env overrode the expected shared token",
+      "file": "tests/unit/sidecar-auth.test.ts",
+      "root_cause": "The unit test only set SIDECAR_SHARED_TOKEN while the client prefers RAG_SIDECAR_SHARED_TOKEN when present in the surrounding process environment",
+      "fix": "Set both SIDECAR_SHARED_TOKEN and RAG_SIDECAR_SHARED_TOKEN explicitly inside the test before constructing the clients",
+      "tags": [
+        "unit-test",
+        "env-leakage",
+        "sidecar",
+        "token"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T10:06:00+08:00"
+    },
+    {
+      "id": "bug-027",
+      "timestamp": "2026-06-15T10:32:00+08:00",
+      "error_message": "Sidecar health contract exposed incomplete fallback/capability state and mixed snake_case with camelCase expectations",
+      "file": "apps/api/src/knowledge/services/python-sidecar.client.ts",
+      "root_cause": "The Python sidecar returned raw health fields without an explicit parser/graph/vector capability summary, while TypeScript callers and tests depended on a normalized camelCase contract",
+      "fix": "Expanded sidecar /health to report parser_mode, graph_mode, capabilities, and vector health; normalized snake_case/camelCase fields in PythonSidecarClient.health()",
+      "tags": [
+        "sidecar",
+        "health-contract",
+        "fallback",
+        "api-contract"
+      ],
+      "related_bugs": [
+        "bug-026"
+      ],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T10:32:00+08:00"
+    },
+    {
+      "id": "bug-028",
+      "timestamp": "2026-06-15T10:33:00+08:00",
+      "error_message": "Juguang integration settings logic was duplicated across admin settings routes and drift-prone",
+      "file": "apps/web/src/app/admin/settings/juguang/page.tsx",
+      "root_cause": "The overview settings page, Xiaohongshu integration page, and dedicated Juguang page each kept separate account types, form mapping, webhook URL building, and CRUD calls",
+      "fix": "Centralized integration contracts/helpers in apps/web/src/app/admin/settings/integrations/shared.ts and migrated the Juguang page to reuse the shared layer",
+      "tags": [
+        "frontend",
+        "settings",
+        "duplication",
+        "contract-drift"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T10:33:00+08:00"
+    },
+    {
+      "id": "bug-029",
+      "timestamp": "2026-06-15T11:19:00+08:00",
+      "error_message": "pnpm validate failed because workspace-tenant-isolation.test.ts still mocked prisma.conversation.update after WorkspaceService switched to updateMany",
+      "file": "tests/unit/workspace-tenant-isolation.test.ts",
+      "root_cause": "The unit test harness drifted behind the Sprint 3 implementation change: workspace tenant-scoped mutations now call conversation.updateMany with { id, tenantId } rather than conversation.update by id",
+      "fix": "Replaced the outdated Prisma mock with conversation.updateMany and updated assertions to expect tenant-scoped where clauses; reran the focused test and full pnpm validate successfully",
+      "tags": [
+        "unit-test",
+        "workspace",
+        "tenant-isolation",
+        "mock-drift"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T11:20:00+08:00"
+    },
+    {
+      "id": "bug-030",
+      "timestamp": "2026-06-15T11:39:00+08:00",
+      "error_message": "Nest can't resolve dependencies of the AdminConversationsController (ConversationsService, ?). WorkspaceService at index [1] is not available in ConversationsModule.",
+      "file": "apps/api/src/conversations/conversations.module.ts",
+      "root_cause": "AdminConversationsController injects WorkspaceService but ConversationsModule did not import WorkspaceModule",
+      "fix": "Added WorkspaceModule to ConversationsModule imports array",
+      "tags": ["nestjs", "dependency-injection", "conversations", "workspace"],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T11:39:00+08:00"
+    },
+    {
+      "id": "bug-031",
+      "timestamp": "2026-06-15T12:03:00+08:00",
+      "error_message": "Admin dashboard console showed ApiError: Internal server error because /api/admin/conversations and /api/admin/leads returned 500",
+      "file": "packages/database/prisma/migrations/20260615003000_platform_conversation_keys/migration.sql",
+      "root_cause": "The production database was missing the pending platform conversation key migration, so Prisma queries touching Conversation relations failed with P2022 on conversations.platform_user_id",
+      "fix": "Applied the pending Prisma migration so conversations.platform_user_id and conversations.platform_account_id exist; verified admin conversations and leads endpoints return 200 again",
+      "tags": ["prisma", "migration", "p2022", "conversations", "leads", "dashboard"],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T12:03:00+08:00"
+    },
+    {
+      "id": "bug-032",
+      "timestamp": "2026-06-15T12:11:00+08:00",
+      "error_message": "New root db:ensure script failed with Prisma P1012 because DATABASE_URL was not loaded",
+      "file": "scripts/ensure-db-migrations.ts",
+      "root_cause": "Root tsx scripts do not automatically inherit Prisma env loading from apps/api/.env or the workspace .env when invoked this way",
+      "fix": "Updated ensure-db-migrations.ts to load root .env and apps/api/.env before invoking prisma migrate deploy; verified pnpm db:ensure passes",
+      "tags": ["prisma", "env", "startup-script", "p1012", "tsx"],
+      "related_bugs": ["bug-031"],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T12:11:00+08:00"
+    },
+    {
+      "id": "bug-033",
+      "timestamp": "2026-06-15T12:17:00+08:00",
+      "error_message": "Conversation detail page threw ApiError: Internal server error when clicking assign-to-me",
+      "file": "apps/web/src/app/admin/conversations/[id]/page.tsx",
+      "root_cause": "The page sent assignedTo: 'me' to PATCH /api/admin/conversations/:id/assignment, but the backend now writes assignedTo directly and expects a real admin UUID",
+      "fix": "Fetched /api/auth/me on the detail page, stored the current admin id, and sent that UUID in handleAssign; verified browser click issues PATCH successfully and conversation.assignedTo updates",
+      "tags": ["frontend", "assignment", "conversations", "contract-mismatch", "uuid"],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T12:17:00+08:00"
+    },
+    {
+      "id": "bug-034",
+      "timestamp": "2026-06-15T12:41:00+08:00",
+      "error_message": "Runtime ChunkLoadError: Loading chunk app/admin/login/page failed at http://localhost:3100/_next/static/chunks/app/admin/login/page.js",
+      "file": "apps/web/.next",
+      "root_cause": "A stale Next.js dev process on port 3100 was serving an out-of-date .next cache. The HTML route still returned 200, but the referenced admin/login page chunk returned 404, causing the browser ChunkLoadError.",
+      "fix": "Identified the stale node process bound to 3100, stopped it, deleted apps/web/.next, restarted pnpm --filter @ai-assistant/web dev, and verified both /admin/login and the missing chunk URL return 200 again.",
+      "tags": ["nextjs", "chunkloaderror", "webpack", "dev-server", "cache", "windows"],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T12:41:00+08:00"
+    },
+    {
+      "id": "bug-035",
+      "timestamp": "2026-06-15T16:58:00+08:00",
+      "error_message": "Web build failed after analytics redesign because page.tsx mutated render-local chart state and useMemo dependencies violated React Compiler rules",
+      "file": "apps/web/src/app/admin/analytics/page.tsx",
+      "root_cause": "The new donut chart implementation updated `offset` during render, and several derived datasets were wrapped in manual useMemo blocks whose dependency arrays were narrower than the compiler-inferred values",
+      "fix": "Rewrote donut segment generation as immutable derived data and replaced the problematic analytics-page useMemo wrappers with plain derived constants before rerunning `pnpm --filter @ai-assistant/web build` successfully",
+      "tags": ["frontend", "analytics", "react-compiler", "build-failure", "immutability"],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T16:58:00+08:00"
+    },
+    {
+      "id": "bug-036",
+      "timestamp": "2026-06-15T16:02:00+08:00",
+      "error_message": "API frequently showed connection refused after machine/service restarts and required manual restart",
+      "file": "scripts/wait-for-runtime-deps.ts",
+      "root_cause": "API startup depended on Postgres/Redis being immediately available; when dependencies were not ready, db:ensure failed fast with Prisma P1001 and the bare Node/Nest process exited without supervision or a real readiness probe",
+      "fix": "Added startup dependency waiting and db:ensure retries, introduced /api/health/ready and graceful shutdown instrumentation, and added PM2 ecosystem supervision for automatic restart",
+      "tags": ["stability", "startup-race", "prisma", "redis", "pm2", "readiness"],
+      "related_bugs": ["bug-032"],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T16:02:00+08:00"
+    },
+    {
+      "id": "bug-037",
+      "timestamp": "2026-06-15T16:07:00+08:00",
+      "error_message": "Next.js preview showed 6 net::ERR_ABORTED requests for /_next/static/css/app/layout.css and /_next/static/chunks/* on localhost:3100",
+      "file": "apps/web/.next",
+      "root_cause": "The web dev server was serving a stale/corrupted Next.js dev build cache, causing React Client Manifest and chunk resolution mismatches during admin page loads",
+      "fix": "Stopped the current apps/web Next dev processes, deleted apps/web/.next, restarted pnpm --filter @ai-assistant/web dev, and verified the affected /_next/static/css and /_next/static/chunks URLs all returned 200 again",
+      "tags": ["nextjs", "dev-server", "manifest", "chunk", "err_aborted", "cache"],
+      "related_bugs": ["bug-034"],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T16:07:00+08:00"
+    },
+    {
+      "id": "bug-038",
+      "timestamp": "2026-06-15T17:30:25+08:00",
+      "error_message": "Public chat page '返回控制台' button appeared unresponsive while localhost:3100 showed net::ERR_ABORTED RSC requests",
+      "file": "apps/web/src/app/chat/[tenantSlug]/page.tsx",
+      "root_cause": "The action relied on App Router prefetch/push inside a dev session that had recently hit stale RSC/HMR cache problems, so the route request could start without giving immediate visible feedback and looked like a dead click",
+      "fix": "Changed the action to set a leaving state and use window.location.assign('/admin/dashboard') for a full-page redirect, then restarted the web dev server after clearing apps/web/.next and verified browser navigation from /chat/demo to /admin/dashboard",
+      "tags": ["frontend", "chat", "navigation", "nextjs", "err_aborted", "rsc"],
+      "related_bugs": ["bug-037"],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T17:30:25+08:00"
+    },
+    {
+      "id": "bug-039",
+      "timestamp": "2026-06-15T18:03:12+08:00",
+      "error_message": "Next.js runtime error: Cannot find module './31.js' from apps/web/.next/server/webpack-runtime.js while rendering /admin/leads",
+      "file": "apps/web/.next/server/webpack-runtime.js",
+      "root_cause": "The web dev server was running against a stale/corrupted .next server runtime. webpack-runtime.js referenced sibling chunks as require('./31.js') even though the actual chunk existed under .next/server/chunks/31.js, causing server-side route rendering to crash.",
+      "fix": "Stopped the stale node process on port 3100, deleted apps/web/.next, restarted pnpm --filter @ai-assistant/web dev, and verified /admin/leads and /admin/login return healthy HTML without the module error.",
+      "tags": ["nextjs", "webpack-runtime", "cannot-find-module", "dev-server", "cache", "windows"],
+      "related_bugs": ["bug-034", "bug-037"],
+      "occurrences": 1,
+      "last_seen": "2026-06-15T18:03:12+08:00"
+    }
+  ]
+}

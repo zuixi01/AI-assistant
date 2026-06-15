@@ -1,0 +1,75 @@
+name: ai-sales-assistant
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ai
+      POSTGRES_PASSWORD: ai_password
+      POSTGRES_DB: ai_sales
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio_password
+    ports:
+      - "9002:9000"
+      - "9003:9001"
+    volumes:
+      - minio_data:/data
+
+  python-sidecar:
+    build:
+      context: ./services/python-sidecar
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8001
+      SIDECAR_SHARED_TOKEN: ${SIDECAR_SHARED_TOKEN:-dev-sidecar-token}
+      SIDECAR_ALLOWED_ORIGINS: ${SIDECAR_ALLOWED_ORIGINS:-http://localhost:3100,http://127.0.0.1:3100}
+      DATABASE_URL: postgresql://ai:ai_password@postgres:5432/ai_sales
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.openai.com/v1}
+      LLM_MODEL: ${LLM_MODEL:-gpt-4o-mini}
+      VISION_API_KEY: ${VISION_API_KEY:-}
+      VISION_BASE_URL: ${VISION_BASE_URL:-https://api.openai.com/v1}
+      VISION_MODEL: ${VISION_MODEL:-gpt-4o}
+      ENABLE_KNOWLEDGE_GRAPH: ${ENABLE_KNOWLEDGE_GRAPH:-false}
+      PARSER_BACKEND: ${PARSER_BACKEND:-fallback}
+    ports:
+      - "127.0.0.1:${PYTHON_SIDECAR_PORT:-8001}:8001"
+    volumes:
+      - sidecar_data:/app/.data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8001/health', timeout=2).read()\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  minio_data:
+  sidecar_data:

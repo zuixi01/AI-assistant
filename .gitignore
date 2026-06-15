@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+dist/
+build/
+.turbo/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Test
+coverage/
+tests/reports/
+
+# Prisma
+packages/database/prisma/migrations/
+
+# Uploads
+uploads/
+
+# Misc
+*.tsbuildinfo
+.tmp-admin-cookie.txt
+.dbg/
+.playwright-cli/
+
+# Local agent settings
+.claude/settings.local.json

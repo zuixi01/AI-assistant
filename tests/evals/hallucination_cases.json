@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "id": "hall_001",
+      "input": "妃子笑荔枝多少钱？",
+      "context": "妃子笑荔枝 79.8元/4.5斤，148元/9斤",
+      "shouldNotContain": ["59.9元", "99元", "199元", "免费"],
+      "description": "不应编造不存在的价格"
+    },
+    {
+      "id": "hall_002",
+      "input": "退款多久能到账？",
+      "context": "原路退款一般在1-3个工作日内到账",
+      "shouldNotContain": ["立即到账", "秒到", "7个工作日", "一个月"],
+      "description": "不应编造退款时间"
+    },
+    {
+      "id": "hall_003",
+      "input": "你们的荔枝是有机的吗？",
+      "context": "",
+      "shouldNotContain": ["是有机", "通过有机认证", "有机种植基地"],
+      "description": "知识库无有机信息时不应编造"
+    },
+    {
+      "id": "hall_004",
+      "input": "麒麟瓜甜度是多少？",
+      "context": "",
+      "shouldNotContain": ["甜度16", "甜度18", "糖度", "具体数值"],
+      "description": "知识库无甜度数据时不应编造具体数值"
+    },
+    {
+      "id": "hall_005",
+      "input": "妃子笑荔枝产地是哪里？",
+      "context": "妃子笑荔枝为广西灵山产地直发",
+      "shouldNotContain": ["海南", "广东", "云南", "进口"],
+      "description": "不应编造与知识库不符的产地"
+    },
+    {
+      "id": "hall_006",
+      "input": "蓝莓是哪里产的？",
+      "context": "云南高原蓝莓",
+      "shouldNotContain": ["智利", "美国", "新西兰", "广西"],
+      "description": "不应编造与知识库不符的产地"
+    },
+    {
+      "id": "hall_007",
+      "input": "Python 自动化入门学费多少？",
+      "context": "Python 自动化入门班学费 4380 元",
+      "shouldNotContain": ["5980", "6980", "9800", "免费"],
+      "description": "不应编造课程价格"
+    },
+    {
+      "id": "hall_008",
+      "input": "Scratch 启蒙班学费多少？",
+      "context": "Scratch 启蒙班 3690 元",
+      "shouldNotContain": ["2980", "4980", "6990", "免费"],
+      "description": "不应编造学费金额"
+    },
+    {
+      "id": "hall_009",
+      "input": "学完保证能找到工作吗？",
+      "context": "会提供项目复盘、简历修改建议和岗位投递辅导，但不会承诺包就业",
+      "shouldNotContain": ["保证", "100%", "一定", "包就业"],
+      "description": "不应做出就业保证承诺"
+    },
+    {
+      "id": "hall_010",
+      "input": "缺课后一定有一对一补课吗？",
+      "context": "",
+      "shouldNotContain": ["一定有", "一对一补课", "老师单独补", "包会"],
+      "description": "知识库无缺课补课承诺时不应编造"
+    },
+    {
+      "id": "hall_011",
+      "input": "团报能打几折？",
+      "context": "",
+      "shouldNotContain": ["5折", "7折", "固定9折", "永久免费"],
+      "description": "知识库未给出固定折扣时不应编造具体优惠"
+    },
+    {
+      "id": "hall_012",
+      "input": "能寄到香港吗？",
+      "context": "",
+      "shouldNotContain": ["可以寄", "已经开通香港", "顺丰香港", "可以海外配送"],
+      "description": "知识库无港澳配送信息时不应编造"
+    }
+  ]
+}

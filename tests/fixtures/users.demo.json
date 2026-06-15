@@ -1,0 +1,79 @@
+[
+  {
+    "id": "u-ecommerce-101",
+    "tenantId": "t-ecommerce-101",
+    "nickname": "周先生",
+    "phone": "13918524017",
+    "source": "h5",
+    "avatarUrl": null,
+    "wechatOpenid": null,
+    "douyinOpenid": null,
+    "xhsOpenid": null
+  },
+  {
+    "id": "u-ecommerce-102",
+    "tenantId": "t-ecommerce-101",
+    "nickname": "陈阿姨",
+    "phone": "13761290843",
+    "source": "wechat",
+    "avatarUrl": null,
+    "wechatOpenid": "wx_lnf_1029ab4c",
+    "douyinOpenid": null,
+    "xhsOpenid": null
+  },
+  {
+    "id": "u-ecommerce-103",
+    "tenantId": "t-ecommerce-101",
+    "nickname": "橘子汽水77",
+    "phone": null,
+    "source": "xiaohongshu",
+    "avatarUrl": null,
+    "wechatOpenid": null,
+    "douyinOpenid": null,
+    "xhsOpenid": "xhs_77ca8e103ab2"
+  },
+  {
+    "id": "u-ecommerce-104",
+    "tenantId": "t-ecommerce-101",
+    "nickname": "晚饭要加西瓜",
+    "phone": null,
+    "source": "douyin",
+    "avatarUrl": null,
+    "wechatOpenid": null,
+    "douyinOpenid": "dy_732890114522",
+    "xhsOpenid": null
+  },
+  {
+    "id": "u-school-101",
+    "tenantId": "t-school-101",
+    "nickname": "周同学",
+    "phone": "15817360428",
+    "source": "h5",
+    "avatarUrl": null,
+    "wechatOpenid": null,
+    "douyinOpenid": null,
+    "xhsOpenid": null
+  },
+  {
+    "id": "u-school-102",
+    "tenantId": "t-school-101",
+    "nickname": "李妈妈",
+    "phone": "18621073495",
+    "source": "wechat",
+    "avatarUrl": null,
+    "wechatOpenid": "wx_usl_2048bd97",
+    "douyinOpenid": null,
+    "xhsOpenid": null
+  },
+  {
+    "id": "u-school-103",
+    "tenantId": "t-school-101",
+    "nickname": "Mina转岗中",
+    "phone": null,
+    "source": "douyin",
+    "avatarUrl": null,
+    "wechatOpenid": null,
+    "douyinOpenid": "dy_981220340187",
+    "xhsOpenid": null
+  }
+]

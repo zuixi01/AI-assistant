@@ -1,0 +1,95 @@
+[
+  {
+    "id": "p-citrus-101",
+    "tenantId": "t-ecommerce-101",
+    "title": "四川蒲江耙耙柑 礼盒装",
+    "category": "水果",
+    "price": 6980,
+    "stock": 286,
+    "status": "on_sale",
+    "imageUrl": null,
+    "aiSummary": "晚熟耙耙柑，果皮薄、汁水足，适合作为家庭囤货和异地送礼。",
+    "platform": "local",
+    "skus": [
+      { "skuName": "5斤尝鲜装", "price": 6980, "stock": 174 },
+      { "skuName": "9斤家庭装", "price": 11800, "stock": 112 }
+    ]
+  },
+  {
+    "id": "p-blueberry-101",
+    "tenantId": "t-ecommerce-101",
+    "title": "云南高原蓝莓 125g*4盒",
+    "category": "水果",
+    "price": 11800,
+    "stock": 164,
+    "status": "on_sale",
+    "imageUrl": null,
+    "aiSummary": "云南高原蓝莓，颗粒偏大，适合即食和酸奶搭配。",
+    "platform": "local",
+    "skus": [
+      { "skuName": "4盒家庭装", "price": 11800, "stock": 98 },
+      { "skuName": "8盒囤货装", "price": 21900, "stock": 66 }
+    ]
+  },
+  {
+    "id": "p-watermelon-101",
+    "tenantId": "t-ecommerce-101",
+    "title": "海南麒麟瓜 单果装",
+    "category": "水果",
+    "price": 4680,
+    "stock": 93,
+    "status": "on_sale",
+    "imageUrl": null,
+    "aiSummary": "海南麒麟瓜，甜度稳定，适合聚餐和夏季家庭消费。",
+    "platform": "local",
+    "skus": [
+      { "skuName": "4.5-5.5斤", "price": 4680, "stock": 51 },
+      { "skuName": "6-7斤", "price": 5680, "stock": 42 }
+    ]
+  },
+  {
+    "id": "p-lychee-101",
+    "tenantId": "t-ecommerce-101",
+    "title": "广西妃子笑荔枝 鲜摘现发",
+    "category": "水果",
+    "price": 7980,
+    "stock": 142,
+    "status": "on_sale",
+    "imageUrl": null,
+    "aiSummary": "广西灵山妃子笑荔枝，脆甜带果香，适合冷藏后食用。",
+    "platform": "local",
+    "skus": [
+      { "skuName": "4.5斤装", "price": 7980, "stock": 79 },
+      { "skuName": "9斤装", "price": 14800, "stock": 63 }
+    ]
+  },
+  {
+    "id": "p-durian-101",
+    "tenantId": "t-ecommerce-101",
+    "title": "越南干尧榴莲 熟成现发",
+    "category": "水果",
+    "price": 15800,
+    "stock": 58,
+    "status": "on_sale",
+    "imageUrl": null,
+    "aiSummary": "熟成度偏高、香气足，适合喜欢软糯口感的老客。",
+    "platform": "local",
+    "skus": [
+      { "skuName": "2.2-2.8kg", "price": 15800, "stock": 34 },
+      { "skuName": "3.0-3.5kg", "price": 19800, "stock": 24 }
+    ]
+  },
+  {
+    "id": "p-history-101",
+    "tenantId": "t-ecommerce-101",
+    "title": "历史下架组合果切券",
+    "category": "增值服务",
+    "price": 1290,
+    "stock": 0,
+    "status": "off_shelf",
+    "imageUrl": null,
+    "aiSummary": "历史活动商品，当前不再对外售卖。",
+    "platform": "local",
+    "skus": []
+  }
+]

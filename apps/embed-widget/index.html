@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 智能客服 - 嵌入式聊天组件</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .demo-page { padding: 60px 40px; max-width: 800px; margin: 0 auto; }
+    .demo-page h1 { font-size: 28px; color: #1f2937; margin-bottom: 12px; }
+    .demo-page p { color: #6b7280; margin-bottom: 24px; line-height: 1.6; }
+    .demo-page .code-block { background: #f3f4f6; border-radius: 8px; padding: 20px; font-family: monospace; font-size: 14px; overflow-x: auto; }
+    .demo-page .code-block code { white-space: pre; }
+    .demo-page h2 { font-size: 20px; color: #374151; margin: 32px 0 16px; }
+    .demo-page ul { padding-left: 20px; color: #4b5563; }
+    .demo-page ul li { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="demo-page">
+    <h1>AI 智能客服 - 嵌入式聊天组件</h1>
+    <p>这是一个可嵌入任意网页的 AI 聊天组件。点击右下角的聊天按钮开始体验。</p>
+
+    <h2>使用方法</h2>
+    <div class="code-block">
+      <code>&lt;script src="ai-chat-widget.umd.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  AIChatWidget.init({
+    apiBaseUrl: 'http://localhost:4000',
+    tenantId: 'demo',
+    position: 'bottom-right',
+    primaryColor: '#2563eb'
+  });
+&lt;/script&gt;</code>
+    </div>
+
+    <h2>配置参数</h2>
+    <ul>
+      <li><strong>apiBaseUrl</strong> - 后端 API 地址</li>
+      <li><strong>tenantId</strong> - 租户 ID</li>
+      <li><strong>position</strong> - 位置：bottom-right（默认）或 bottom-left</li>
+      <li><strong>primaryColor</strong> - 主题色，默认 #2563eb</li>
+    </ul>
+
+    <h2>功能特性</h2>
+    <ul>
+      <li>AI 智能问答</li>
+      <li>知识库检索</li>
+      <li>多轮对话</li>
+      <li>流式响应</li>
+      <li>响应式设计</li>
+    </ul>
+  </div>
+
+  <!-- 聊天组件 -->
+  <div id="ai-chat-widget"></div>
+
+  <script>
+    // 内联聊天组件 - 无需打包即可运行
+    (function() {
+      const config = {
+        apiBaseUrl: 'http://localhost:4000',
+        tenantId: 'demo',
+        position: 'bottom-right',
+        primaryColor: '#2563eb'
+      };
+
+      let isOpen = false;
+      let conversationId = null;
+      let messages = [];
+      let loading = false;
+
+      // 创建样式
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes ai-widget-bounce {
+          0%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-6px); }
+        }
+        .ai-widget-btn {
+          position: fixed;
+          bottom: 24px;
+          right: 24px;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: ${config.primaryColor};
+          color: white;
+          border: none;
+          cursor: pointer;
+          font-size: 28px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+          z-index: 99999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.2s;
+        }
+        .ai-widget-btn:hover { transform: scale(1.1); }
+        .ai-widget-window {
+          position: fixed;
+          bottom: 100px;
+          right: 24px;
+          width: 380px;
+          height: 540px;
+          background: white;
+          border-radius: 16px;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          z-index: 99999;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .ai-widget-header {
+          background: ${config.primaryColor};
+          color: white;
+          padding: 18px 20px;
+          text-align: center;
+        }
+        .ai-widget-header h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .ai-widget-header p { font-size: 12px; opacity: 0.85; }
+        .ai-widget-messages {
+          flex: 1;
+          overflow-y: auto;
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          background: #f9fafb;
+        }
+        .ai-widget-msg {
+          max-width: 82%;
+          padding: 10px 14px;
+          border-radius: 16px;
+          font-size: 14px;
+          line-height: 1.6;
+          word-break: break-word;
+          white-space: pre-wrap;
+        }
+        .ai-widget-msg.user {
+          align-self: flex-end;
+          background: ${config.primaryColor};
+          color: white;
+          border-bottom-right-radius: 4px;
+        }
+        .ai-widget-msg.assistant {
+          align-self: flex-start;
+          background: white;
+          color: #1f2937;
+          border: 1px solid #e5e7eb;
+          border-bottom-left-radius: 4px;
+        }
+        .ai-widget-typing {
+          display: flex;
+          gap: 5px;
+          padding: 12px 16px;
+          align-self: flex-start;
+        }
+        .ai-widget-typing span {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #9ca3af;
+          animation: ai-widget-bounce 1.2s infinite;
+        }
+        .ai-widget-typing span:nth-child(2) { animation-delay: 0.15s; }
+        .ai-widget-typing span:nth-child(3) { animation-delay: 0.3s; }
+        .ai-widget-input-area {
+          padding: 14px;
+          border-top: 1px solid #e5e7eb;
+          display: flex;
+          gap: 10px;
+          background: white;
+        }
+        .ai-widget-input {
+          flex: 1;
+          border: 1px solid #d1d5db;
+          border-radius: 24px;
+          padding: 10px 18px;
+          font-size: 14px;
+          outline: none;
+          transition: border-color 0.2s;
+        }
+        .ai-widget-input:focus { border-color: ${config.primaryColor}; }
+        .ai-widget-send {
+          background: ${config.primaryColor};
+          color: white;
+          border: none;
+          border-radius: 24px;
+          padding: 10px 22px;
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: opacity 0.2s;
+        }
+        .ai-widget-send:disabled { opacity: 0.5; cursor: not-allowed; }
+        .ai-widget-send:hover:not(:disabled) { opacity: 0.9; }
+        .ai-widget-welcome {
+          text-align: center;
+          color: #9ca3af;
+          margin-top: 60px;
+          font-size: 14px;
+        }
+        .ai-widget-welcome .icon { font-size: 48px; margin-bottom: 12px; }
+      `;
+      document.head.appendChild(style);
+
+      // 创建DOM
+      const container = document.getElementById('ai-chat-widget');
+
+      const btn = document.createElement('button');
+      btn.className = 'ai-widget-btn';
+      btn.innerHTML = '💬';
+      btn.onclick = toggle;
+
+      const win = document.createElement('div');
+      win.className = 'ai-widget-window';
+      win.style.display = 'none';
+
+      win.innerHTML = `
+        <div class="ai-widget-header">
+          <h3>AI 智能客服</h3>
+          <p>有什么可以帮您？</p>
+        </div>
+        <div class="ai-widget-messages" id="ai-widget-messages">
+          <div class="ai-widget-welcome">
+            <div class="icon">🤖</div>
+            <p>您好！我是AI智能客服</p>
+            <p>请问有什么可以帮助您的？</p>
+          </div>
+        </div>
+        <div class="ai-widget-input-area">
+          <input class="ai-widget-input" id="ai-widget-input" placeholder="输入您的问题..." />
+          <button class="ai-widget-send" id="ai-widget-send">发送</button>
+        </div>
+      `;
+
+      container.appendChild(btn);
+      container.appendChild(win);
+
+      const messagesEl = win.querySelector('#ai-widget-messages');
+      const inputEl = win.querySelector('#ai-widget-input');
+      const sendBtn = win.querySelector('#ai-widget-send');
+
+      inputEl.onkeypress = (e) => { if (e.key === 'Enter') handleSend(); };
+      sendBtn.onclick = handleSend;
+
+      function toggle() {
+        isOpen = !isOpen;
+        win.style.display = isOpen ? 'flex' : 'none';
+        btn.innerHTML = isOpen ? '✕' : '💬';
+        if (isOpen && !conversationId) initConversation();
+      }
+
+      async function initConversation() {
+        try {
+          const res = await fetch(`${config.apiBaseUrl}/api/conversations`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tenantId: config.tenantId, channel: 'embed' })
+          });
+          const data = await res.json();
+          conversationId = data.id;
+        } catch (err) {
+          console.error('Failed to create conversation:', err);
+          addMessage('assistant', '连接服务失败，请稍后重试。');
+        }
+      }
+
+      function addMessage(role, content) {
+        const msg = document.createElement('div');
+        msg.className = `ai-widget-msg ${role}`;
+        msg.textContent = content;
+        messagesEl.appendChild(msg);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        messages.push({ role, content });
+      }
+
+      function showTyping() {
+        const typing = document.createElement('div');
+        typing.className = 'ai-widget-typing';
+        typing.id = 'ai-widget-typing';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        messagesEl.appendChild(typing);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function hideTyping() {
+        const typing = document.getElementById('ai-widget-typing');
+        if (typing) typing.remove();
+      }
+
+      async function handleSend() {
+        const text = inputEl.value.trim();
+        if (!text || !conversationId || loading) return;
+
+        inputEl.value = '';
+        addMessage('user', text);
+        loading = true;
+        sendBtn.disabled = true;
+        showTyping();
+
+        try {
+          const res = await fetch(`${config.apiBaseUrl}/api/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ conversationId, message: text })
+          });
+          const data = await res.json();
+          hideTyping();
+          addMessage('assistant', data.content || '抱歉，我暂时无法回答。');
+        } catch (err) {
+          hideTyping();
+          addMessage('assistant', '网络错误，请稍后重试。');
+        } finally {
+          loading = false;
+          sendBtn.disabled = false;
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

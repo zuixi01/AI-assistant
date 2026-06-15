@@ -1,0 +1,80 @@
+[
+  {
+    "id": "uq-ecommerce-101",
+    "tenantId": "t-ecommerce-101",
+    "question": "你们的水果礼盒能定制贺卡吗？",
+    "normalizedQuestion": "水果礼盒定制贺卡",
+    "scene": "general",
+    "intent": "gift_service",
+    "count": 19,
+    "status": "pending",
+    "suggestedAnswer": null,
+    "resolved": false,
+    "failReason": "knowledge_not_found"
+  },
+  {
+    "id": "uq-ecommerce-102",
+    "tenantId": "t-ecommerce-101",
+    "question": "蓝莓可以开公司抬头发票吗？",
+    "normalizedQuestion": "蓝莓企业发票",
+    "scene": "order",
+    "intent": "invoice",
+    "count": 11,
+    "status": "reviewed",
+    "suggestedAnswer": "支持电子普通发票，企业抬头需要在下单后尽快提供税号和邮箱，具体开票时效以财务处理为准。",
+    "resolved": true,
+    "failReason": "knowledge_ambiguous"
+  },
+  {
+    "id": "uq-ecommerce-103",
+    "tenantId": "t-ecommerce-101",
+    "question": "能不能寄到香港？",
+    "normalizedQuestion": "港澳配送范围",
+    "scene": "logistics",
+    "intent": "shipping",
+    "count": 6,
+    "status": "pending",
+    "suggestedAnswer": null,
+    "resolved": false,
+    "failReason": "knowledge_not_found"
+  },
+  {
+    "id": "uq-school-101",
+    "tenantId": "t-school-101",
+    "question": "公司团体报名可以签培训协议吗？",
+    "normalizedQuestion": "企业培训协议",
+    "scene": "course",
+    "intent": "enterprise_course",
+    "count": 9,
+    "status": "pending",
+    "suggestedAnswer": null,
+    "resolved": false,
+    "failReason": "knowledge_not_found"
+  },
+  {
+    "id": "uq-school-102",
+    "tenantId": "t-school-101",
+    "question": "线上班缺课后作业会有人批改吗？",
+    "normalizedQuestion": "线上班缺课作业批改",
+    "scene": "course",
+    "intent": "teaching_service",
+    "count": 13,
+    "status": "reviewed",
+    "suggestedAnswer": "线上班支持课后作业提交和助教点评，但缺课后是否安排一对一补答疑，需要以所报班型服务说明为准。",
+    "resolved": true,
+    "failReason": "knowledge_ambiguous"
+  },
+  {
+    "id": "uq-school-103",
+    "tenantId": "t-school-101",
+    "question": "学完是不是一定能安排面试？",
+    "normalizedQuestion": "结课面试保证",
+    "scene": "course",
+    "intent": "employment",
+    "count": 16,
+    "status": "reviewed",
+    "suggestedAnswer": "课程会提供简历优化、项目复盘和岗位投递辅导，但不会承诺保面或包就业。",
+    "resolved": true,
+    "failReason": "knowledge_ambiguous"
+  }
+]

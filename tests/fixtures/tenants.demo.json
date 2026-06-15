@@ -1,0 +1,39 @@
+[
+  {
+    "id": "t-ecommerce-101",
+    "name": "岭南鲜配水果专营店",
+    "slug": "lingnan-fresh-produce",
+    "type": "ecommerce",
+    "status": "active",
+    "plan": "pro",
+    "config": {
+      "businessHours": "08:30-23:00",
+      "autoReply": true,
+      "welcomeMessage": "你好，欢迎来到岭南鲜配。你可以直接问我规格、库存、发货时效或坏果售后。",
+      "platforms": ["h5", "wechat", "douyin", "xiaohongshu", "miniapp"]
+    }
+  },
+  {
+    "id": "t-school-101",
+    "name": "向上数字技能中心",
+    "slug": "upskill-digital-lab",
+    "type": "school",
+    "status": "active",
+    "plan": "basic",
+    "config": {
+      "businessHours": "09:00-21:30",
+      "autoReply": true,
+      "welcomeMessage": "你好，这里是向上数字技能中心课程顾问。你可以咨询试听、班型、上课时间和退费规则。",
+      "platforms": ["h5", "wechat", "douyin"]
+    }
+  },
+  {
+    "id": "t-archive-101",
+    "name": "华东校区历史租户",
+    "slug": "east-campus-archive",
+    "type": "school",
+    "status": "suspended",
+    "plan": "free",
+    "config": null
+  }
+]

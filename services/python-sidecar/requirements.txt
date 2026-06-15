@@ -1,0 +1,40 @@
+# RAG-Anything Python Sidecar Service
+# This service provides multimodal document parsing (MinerU/Docling)
+# and knowledge graph retrieval (LightRAG) capabilities.
+#
+# Install: pip install -r requirements.txt
+# Run: python main.py
+
+# Core
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.12
+pydantic>=2.0
+python-dotenv>=1.0
+
+# RAG-Anything (multimodal RAG pipeline)
+# Uncomment when ready to enable full multimodal:
+# raganything[all]>=0.1.0
+
+# Document parsing (choose one)
+# Option A: MinerU (recommended, GPU-accelerated)
+# magic-pdf>=0.3.0
+# Option B: Docling (lightweight, CPU-friendly)
+# docling>=2.0
+
+# LightRAG (knowledge graph)
+# lightrag-hku>=1.0
+
+# Embedding & LLM (OpenAI-compatible API)
+openai>=1.0
+
+# Optional local vector accelerator
+numpy>=1.26
+psycopg[binary]>=3.1
+turbovec==0.7.0
+
+# Image processing
+Pillow>=10.0
+
+# Office document support
+# Requires LibreOffice installed on the system
